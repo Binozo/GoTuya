@@ -3,7 +3,7 @@
 An Go Api to control your Tuya devices through your Local Network (LAN)
 
 Features:
-- 🌧🙅‍♂️ Works completely offline without any connection to the shitty and unsecure chinese clouds
+- 🌧🙅‍♂️ Works completely offline without any connection to the 💩 and unsecure chinese clouds
 - 🔌 Easily extendable: Control any Tuya device with ease
 - 🔬 Battle tested with a Tuya TCL A/C
 
