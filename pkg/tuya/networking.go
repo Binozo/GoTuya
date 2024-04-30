@@ -142,7 +142,7 @@ func (d *Device) sendRefreshCommand() (response, error) {
 
 	curResponse, err := d.readFullPayload()
 	d.currentStatus = curResponse
-	return curResponse, nil
+	return curResponse, err
 }
 
 // IsConnected returns if the device is connected
