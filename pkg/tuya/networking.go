@@ -258,6 +258,8 @@ func (d *Device) readFullPayload() (response, error) {
 		decrypted = decrypted[:len(decrypted)-3]
 	} else if bytes.Equal(decrypted[len(decrypted)-2:], []byte{0x02, 0x02}) {
 		decrypted = decrypted[:len(decrypted)-2]
+	} else if bytes.Equal(decrypted[len(decrypted)-1:], []byte{0x01}) {
+		decrypted = decrypted[:len(decrypted)-1]
 	} else if bytes.Equal(decrypted[len(decrypted)-8:], []byte{0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08}) {
 		decrypted = decrypted[:len(decrypted)-8]
 	}
