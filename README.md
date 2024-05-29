@@ -1,6 +1,6 @@
 # GoTuya 🔓🌩️
 
-An Go Api to control your Tuya devices through your Local Network (LAN)
+A Go Api to control your Tuya devices through your Local Network (LAN)
 
 Features:
 - 🌧🙅‍♂️ Works completely offline without any connection to the 💩 and unsecure chinese clouds
