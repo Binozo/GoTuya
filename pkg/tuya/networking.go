@@ -262,6 +262,8 @@ func (d *Device) readFullPayload() (response, error) {
 		decrypted = decrypted[:len(decrypted)-1]
 	} else if bytes.Equal(decrypted[len(decrypted)-8:], []byte{0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08}) {
 		decrypted = decrypted[:len(decrypted)-8]
+	} else if bytes.Equal(decrypted[len(decrypted)-16:], []byte{0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10}) {
+		decrypted = decrypted[:len(decrypted)-16]
 	}
 	if err = json.Unmarshal(decrypted, &jsonResponse); err != nil {
 		return response{}, err
