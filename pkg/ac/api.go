@@ -151,3 +151,31 @@ func (a *AC) GetIsTurboEnabled() (bool, error) {
 		return false, errors.New(fmt.Sprintf("dps index %s not contained in: %s", onDpsIndex, currentStatus))
 	}
 }
+
+func (a *AC) SetNightMode(nightMode bool) error {
+	if !a.IsConnected() {
+		if err := a.Connect(); err != nil {
+			return err
+		}
+		defer a.Disconnect()
+	}
+	return a.Set(map[string]interface{}{
+		onDpsIndex:        true,
+		nightModeDpsIndex: nightMode,
+	})
+}
+
+func (a *AC) GetIsNightModeEnabled() (bool, error) {
+	if !a.IsConnected() {
+		if err := a.Connect(); err != nil {
+			return false, err
+		}
+		defer a.Disconnect()
+	}
+	currentStatus := a.GetCurrentStatus()
+	if nightValue, ok := currentStatus[nightModeDpsIndex]; ok {
+		return nightValue.(bool), nil
+	} else {
+		return false, errors.New(fmt.Sprintf("dps index %s not contained in: %s", onDpsIndex, currentStatus))
+	}
+}
