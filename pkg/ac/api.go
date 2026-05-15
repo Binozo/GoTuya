@@ -179,3 +179,31 @@ func (a *AC) GetIsNightModeEnabled() (bool, error) {
 		return false, errors.New(fmt.Sprintf("dps index %s not contained in: %s", onDpsIndex, currentStatus))
 	}
 }
+
+func (a *AC) SetMode(mode Mode) error {
+	if !a.IsConnected() {
+		if err := a.Connect(); err != nil {
+			return err
+		}
+		defer a.Disconnect()
+	}
+	return a.Set(map[string]interface{}{
+		onDpsIndex:   true,
+		modeDpsIndex: mode,
+	})
+}
+
+func (a *AC) GetMode() (Mode, error) {
+	if !a.IsConnected() {
+		if err := a.Connect(); err != nil {
+			return "", err
+		}
+		defer a.Disconnect()
+	}
+	currentStatus := a.GetCurrentStatus()
+	if modeValue, ok := currentStatus[modeDpsIndex]; ok {
+		return Mode(modeValue.(string)), nil
+	} else {
+		return "", errors.New(fmt.Sprintf("dps index %s not contained in: %s", onDpsIndex, currentStatus))
+	}
+}
